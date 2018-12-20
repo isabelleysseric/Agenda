@@ -1,6 +1,6 @@
 # Gestionnaire d'agenda
 <br>
-<p><a href=""><img src="http://pxhere.com/en/photo/1081428"alt="Agenda, image de Pxhere.com"></a><br>
+<p><a href=""><img src="http://www.thebluediamondgallery.com/wooden-tile/images/agenda.jpg"alt="Agenda, image de TheBlueDiamondGallery.com"></a><br>
 <br>
 ### AUTEUR:<br>
 ============
@@ -29,7 +29,8 @@ La valeur liée à <code>max id</code> est un entier qui permet de garder le com
 <br>
 ### UTILISATION:<br>
 ===============
-<p>Le  programme contient un seul fichier <code>agenda.py</code></p> avec les méthodes:<br>
+Le  programme contient un seul fichier <code>agenda.py</code> avec les méthodes:
+  <br>
 <li> <code>str_to_date</code></li>
 <li> <code>str_to_heure</code></li>
 <li> <code>creer_agenda</code></li>
@@ -43,15 +44,18 @@ La valeur liée à <code>max id</code> est un entier qui permet de garder le com
 <li> <code>supprimer evenement</code></li>
 <li> <code>afficher_menu</code></li>
 <li> <code>main</code></li>
-Pour démarrer, choisir une option dans le menu. Les options sont: <br>
+  <br>
+Pour démarrer, choisir une option dans le menu. Les options sont: 
+  <br>
 <li> <code>1- Créer un nouvel agenda</code></li>
 <li> <code>2- Ouvrir un agenda existant</code></li>
 <li> <code>3- Sauvegarder les modifications effectuées</code></li>
 <li> <code>4- Ajouter un évènement</code></li>
 <li> <code>5- Supprimer un évènement</code></li>
 <li> <code>6- Afficher l'agenda</code></li>
-<li> <code>7- Quitter</code></li>
+<li> <code>7- Quitter</code></li><br>
 <br>
+  
 ### MÉTHODE DE RAPPORT DE BUG:<br>
 =============================
 <p>(À déterminer)</p>
