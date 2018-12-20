@@ -50,7 +50,6 @@
 <li> <code>6- Afficher l'agenda</code></li>
 <li> <code>7- Quitter</code></li><br>
 <br>
-  
 ## MÉTHODE DE RAPPORT DE BUG:<br>
 =============================
 <p>(À déterminer)</p>
