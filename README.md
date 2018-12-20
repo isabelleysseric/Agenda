@@ -2,21 +2,21 @@
 <br>
 <a href=""><img src="http://www.thebluediamondgallery.com/wooden-tile/images/agenda.jpg"alt="Agenda, image de TheBlueDiamondGallery.com"></a><br>
 <br>
-### AUTEUR:<br>
+## AUTEUR:<br>
 ============
 <p> Isabelle EYSSERIC</p>
 <br>
-### ETAT DU PROJET:<br>
+## ETAT DU PROJET:<br>
 ==================
 <p>Version initiale</p>
 <br>
-###DESCRIPTION:<br>
+## DESCRIPTION:<br>
 ================
 <p> L'agenda est représenté dans le programme par un dictionnaire avec trois clés: <code>proprio</code>, <code>evenements</code> et <code>max_id</code>. </p>
 <br>
-<p>La valeur liée à <code>proprio</code> est le nom du propriétaire de l’agenda. </p> <br>
+<p>La valeur liée à <code>proprio</code> est le nom du propriétaire de l’agenda. </p>
+<p>La valeur liée à <code>max id</code> est un entier qui permet de garder le compte de l’identifiant le plus grand des événements.</p>
 <p>La valeur liée à <code>evenements</code> est une liste contenant des événements, où chaque événement est aussi un dictionnaire avec les champs : </p>
-<br>
 <li><code>id</code> (l’identifiant de l’événement), </li>
 <li><code>date</code> (la date de l’événement), </li>
 <li><code>heure_debut</code> (l’heure à laquelle l’événement débute), </li>
@@ -24,12 +24,9 @@
 <li><code>titre</code> (le titre ou le nom de l’événement) et </li>
 <li><code>lieu</code> (le lieu où se déroule l’événement). </li>
 <br>
-<p>La valeur liée à <code>max id</code> est un entier qui permet de garder le compte de l’identifiant le plus grand des événements.</p>
-<br>
-###UTILISATION:<br>
+## UTILISATION:<br>
 ===============
 <p>Le  programme contient un seul fichier <code>agenda.py</code> avec les méthodes:</p>
-  <br>
 <li> <code>str_to_date</code></li>
 <li> <code>str_to_heure</code></li>
 <li> <code>creer_agenda</code></li>
@@ -45,7 +42,6 @@
 <li> <code>main</code></li>
   <br>
 <p>Pour démarrer, choisir une option dans le menu. Les options sont: </p>
-  <br>
 <li> <code>1- Créer un nouvel agenda</code></li>
 <li> <code>2- Ouvrir un agenda existant</code></li>
 <li> <code>3- Sauvegarder les modifications effectuées</code></li>
@@ -55,15 +51,15 @@
 <li> <code>7- Quitter</code></li><br>
 <br>
   
-### MÉTHODE DE RAPPORT DE BUG:<br>
+## MÉTHODE DE RAPPORT DE BUG:<br>
 =============================
 <p>(À déterminer)</p>
 <br>
-### CONTRIBUTION:<br>
+## CONTRIBUTION:<br>
 ================
 <p>(À déterminer)</p>
 <br>
-### Licence(s), copyright:<br>
+## Licence(s), copyright:<br>
 =========================
 <p>(À déterminer)</p>
 <br>
