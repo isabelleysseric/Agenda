@@ -24,9 +24,9 @@ def str_to_date(s):
 
     return datetime.date(annee, mois, jour)
 
-# OK Retourne datetime.date: Une date du module datetime ou date_actuelle.
 
-def str_to_heure(s):  # OK
+
+def str_to_heure(s): 
     """
     Transforme une chaine de caractères au format HH:MM en un objet heure.
     Si la chaine de caractères passée en argument est vide ou contient uniquement des espaces, la fonction devra retourner None.
@@ -41,13 +41,12 @@ def str_to_heure(s):  # OK
         return None                     # la fonction retourne None
     # Transforme une chaine de caractères au format HH:MM en un objet heure
     parties = s.split(':')
-    heure = int(parties[0])
-    minute = int(parties[1])
+    heures = int(parties[0])
+    minutes = int(parties[1])
 
-    return datetime.time(heure, minute)
+    return datetime.time(heures, minutes)
 
 
-# OK Retourne datetime.time: une heure du module datetime ou None.
 
 def creer_agenda(nom_proprietaire):
     """
@@ -63,18 +62,9 @@ def creer_agenda(nom_proprietaire):
     Returns:
         dict: Dictionnaire qui représente l'agenda.
     """
-    agenda = {}                                 # La liste des évènements d'un nouvel agenda est une liste vide
-    agenda['proprio'] = nom_proprietaire        # nom_proprietaire (str): Le nom du propriétaire de l'agenda
-    agenda['evenements'] = None
-    agenda['max_id'] = 0                        #  max_id est à 0 comme valeur initiale
-
-    if nom_proprietaire == None or (' ' in nom_proprietaire) == True:       # si le nom_propriétaire est vide ou juste des espaces alors ca ne marche pas
-        return None
-    else:                       # si l'info est bien rentré alors ca retourne l'agenda
-        return agenda           # dict: Dictionnaire qui représente l'agenda
+    return {'proprio': nom_proprietaire, 'evenements': [], 'max_id': 0}
 
 
-# OK Retourne dict: Dictionnaire qui représente l'agenda
 
 def creer_evenement(identifiant, date, heure_debut, heure_fin, titre, lieu=None):
     """
@@ -92,19 +82,9 @@ def creer_evenement(identifiant, date, heure_debut, heure_fin, titre, lieu=None)
     Returns:
         dict: Dictionnaire représentant un évènement.
     """
-    # Arguments:
-    evt = {}                    # Un évènement est un dictionnaire
-    evt['id'] = identifiant     # identifiant (int): L'identifiant de l'évènement.
-    evt['date'] = date
-    evt['heure_debut'] = heure_debut
-    evt['heure_fin'] = heure_fin
-    evt['titre'] = titre
-    evt['lieu'] = lieu
-
-    return evt                  Retourne le Dictionnaire représentant un évènement
+    return {'id': identifiant, 'date': date, 'heure_debut': heure_debut, 'heure_fin': heure_fin, 'titre': titre, 'lieu': lieu}
 
 
-# Return dict: Dictionnaire représentant un évènement
 
 def evenement_to_str(evt):
     """
@@ -126,28 +106,11 @@ def evenement_to_str(evt):
     Returns:
         str: Chaîne de caractères dans le format ci-dessus représentant l'évènement passé en argument.
     """
-    evt = {}                    # dictionnaire de l'événement
-    titre = evt['titre']
-    identifiant = evt['id']
-    te = evt['date']
-    heure_debut = evt['heure_debut']
-    heure_fin = evt['heure_fin']
-    lieu = evt['lieu']
-
-    # Returns:
-    if lieu in evt is None:     # si le lieu est vide alors  fait cette instruction
-        return
-        print('ID:', {evt['id']}, ' => ', {evt['titre']})
-        print({date}, ' ', {heure_debut}, ' à ', {heure_fin})
-        print('Lieu: Inconnu')
-    else:                       # Sinon celle-ci...
-        return
-        print('ID:', {evt['id']}, ' => ', {evt['titre']})
-        print({date}, ' ', {heure_debut}, ' à ', {heure_fin})
-        print('Lieu: ', {lieu})
+    return 'ID:{} => {}\n{} {} à {}\nLieu: {}'.format(evt['id'], evt['titre'], evt['date'], evt['heure_debut'].strftime('%H:%M'), 
+	       evt['heure_fin'].strftime('%H:%M'), evt['lieu'] 
+           if evt['lieu'] else 'Inconnu')
 
 
-# Retourne str: Chaîne de caractères dans le format ci-dessus représentant l'évènement passé en argument
 
 def sauvegarder_agenda(agenda, fichier):
     """
@@ -174,12 +137,16 @@ def sauvegarder_agenda(agenda, fichier):
         agenda (dict): L'agenda à sauvegarder.
         fichier (str): Emplacement du fichier où l'agenda sera sauvegardé.
     """
-    mon_fichier = open(fichier, 'w')            # ouvrir le fichier rentré
-    mon_fichier.write(str(agenda['proprio']))   # écrire l'info au niveau proprio
-    mon_fichier.write(str(agenda['max_id']))    # écrire l'info au niveau max_id
-    mon_fichier.write(str(agenda['evenements']))# écrire l'info au niveau evenements
-    mon_fichier.close()                         # et fermer le fichier ouvert
+    texte = '{}\n{}\n'.format(agenda['proprio'], agenda["max_id"])
+    
+    for evt in agenda['evenements']:
+        texte += evenement_to_str(evt) + '\n'
+    
+    with open(emplacement_fichier, 'w') as f:
+        f.write(texte)
 
+        
+        
 def charger_agenda(fichier):
     """
     Opération inverse de la fonction 'sauvegarder_agenda'.
@@ -190,12 +157,33 @@ def charger_agenda(fichier):
 
     Returns:
         dict: Agenda contenu dans le fichier lu.
-    # """
-    mon_fichier = open(fichier, "r")      # ouvrir le fichier et le lire
-    mon_fichier_enregistre = mon_fichier.read()      # mettre l'info dans la variable mon_fichier_enregistre
-    print(mon_fichier_enregistre)                    # L'imprimer
+    """
+    with open(emplacement_fichier, 'r') as f:
+        nom_proprietaire = f.readline().strip()
+        max_id = int(f.readline().strip())
+        
+        evenements = []
+        while True:
+            tmp = f.readline().split(' => ')
+            if tmp == ['']:
+                break
+            identifiant = int(tmp[0].split(':')[1])
+            titre = tmp[1].strip()
 
-# Return dict: Agenda contenu dans le fichier lu.
+            tmp = f.readline()
+            d, h1, _, h2 = tmp.split(' ')
+            date = str_to_date(d)
+            heure_debut = str_to_heure(h1)
+            heure_fin = str_to_heure(h2)
+
+            lieu = f.readline().split(': ')[1].strip()
+            lieu = None if lieu == "" else lieu
+
+            evenements.append(creer_evenement(identifiant, date, heure_debut, heure_fin, titre, lieu))
+
+     return {'proprio': nom_proprietaire, 'evenements': evenements, 'max_id': max_id}
+
+
 
 def saisir_evenement():
     """
@@ -226,29 +214,30 @@ def saisir_evenement():
         - Lieu: Chaîne de caractères entrée par l'utilisateur. Le lieu est optionnel. Pas de validation à faire.
     """
 
-    titre = input('Entrer le titre de l\'événement: ', )                        # rentre l'info du titre et verrifie, demande la question tant que la response n'est pas la bonne
-    while titre is None or '':
-        print('Vous n\'avez pas bien rentré les informations, recommencez s\'il vous plait !')
+    ok = False
+    while not ok:
+        titre = input("Titre de l'évènement: ")
+        ok = titre != '' and not titre.isspace()
+    
+    # Pas de validation pour la date
+    date = str_to_date( input('Date au format AAAA-MM-JJ: ') )
 
-    date = str_to_date(input('Entrer la date de l\'événement: '))               # rentre l'info de la date
+    ok = False
+    while not ok:
+        heure_debut = str_to_heure( input('Heure de début au format HH:MM: ') )
+        ok = heure_debut != None
 
-    debut = str_to_heure(input('Entrer l\'heure de début de l\'événement: '))   # rentre l'info du titre et verrifie, demande la question tant que la response n'est pas la bonne
-    while titre is None or '':
-        print('Vous n\'avez pas bien rentré les informations, recommencez s\'il vous plait !')
+    ok = False
+    while not ok:
+        heure_fin = str_to_heure( input('Heure de fin au format HH:MM: ') )
+        ok = heure_fin != None and heure_fin > heure_debut
 
-    fin = str_to_heure(input('Entrer l\'heure de début de l\'événement:  ', ))  # rentre l'info du titre et verrifie, demande la question tant que la response n'est pas la bonne
-    while fin is None or fin < debut:
-        print('Vous n\'avez pas bien rentré les informations, recommencez s\'il vous plait !')
+    # Pas de validation pour le lieu
+    lieu = input("Lieu de l'évènement: ")
 
-    lieu = input('Entrer le lieu de l\'événement: ')                            # rentre l'info du lieu
-
-    evt = ()                # crée un tuple
-    evt = (date, debut, fin, titre, lieu)
-
-    return evt              # et retourne le tuple
+    return (date, heure_debut, heure_fin, titre, lieu)
 
 
-# Return tuple (date, heure_debut, heure_fin, titre, lieu)
 
 def evenements_en_conflit(evt1, evt2):
     """
@@ -292,15 +281,15 @@ def evenements_en_conflit(evt1, evt2):
     Returns:
         bool: True si les deux évènements sont en conflit, False sinon.
     """
-    if evt1['date'] == evt2['date']:        # verifie
-        if evt2['heure_debut'] > evt1['heure_debut'] or evt2['heure_debut'] < evt1['heure_fin']:
-            if evt2['heure_fin'] > evt1['heure_debut'] or evt2['heure_fin'] < evt1['heure_fin']:
-                return True
-    else:                                      # si tout est beau retoune false
+    if evt1['date'] != evt2['date']:
         return False
+    
+    if evt1['heure_debut'] <= evt2['heure_debut']:
+        return evt2['heure_debut'] < evt1['heure_fin']
+    else:
+        return evt1['heure_debut'] < evt2['heure_fin']
 
-
-# Retourne Boolean
+    
 
 def ajouter_evenement(agenda, date, heure_debut, heure_fin, titre_evenement, lieu=None):
     """
@@ -319,25 +308,19 @@ def ajouter_evenement(agenda, date, heure_debut, heure_fin, titre_evenement, lie
     Returns:
         bool: True si l'évènement créé a pu être ajouté à l'agenda, False sinon.
     """
-
-    print(agenda, date, heure_debut, heure_fin, titre_evenement, lieu)
-
-    if agenda['max_id'] != 0:
-        agenda['max_id'] += 1
-        identifiant = agenda['max_id']
-        agenda['evenements'] = creer_evenement(identifiant, date, heure_debut, heure_fin, titre_evenement, lieu)
-        print(agenda)
-        return True
+    nouvel_evenement = creer_evenement(agenda['max_id']+1, date, heure_debut, heure_fin, titre_evenement, lieu)
+    result = True
+    
+    if any([evenements_en_conflit(evenement, nouvel_evenement) for evenement in agenda['evenements']]):
+        result = False
+        
     else:
+        agenda['evenements'].append(nouvel_evenement)
         agenda['max_id'] += 1
-        identifiant = agenda['max_id']
-        creer_evenement(identifiant, date, heure_debut, heure_fin, titre_evenement, lieu)
-        agenda['evenements'] = titre_evenement
-        print(agenda)
-        return True
+
+    return result
 
 
-# Return bool: True si l'évènement créé a pu être ajouté à l'agenda, False sinon
 
 def supprimer_evenement(agenda, identifiant):
     """
@@ -350,16 +333,11 @@ def supprimer_evenement(agenda, identifiant):
     Returns:
         bool: True si l'évènement est supprimé, False sinon.
     """
-    with evenement_to_str() as identifiant:
-        del evt[identifiant]
-    if identifiant in agenda:
-        del agenda['max_id']
-        print(agenda)
-    else:
-        return False
+    l = len(agenda['evenements'])
+    agenda['evenements'] = [evt for evt in agenda['evenements'] if evt['id'] != identifiant]
+    return len(agenda['evenements']) == l - 1
 
 
-# Return bool: True si l'évènement est supprimé, False sinon.
 
 def agenda_to_str(agenda, date_debut, date_fin):
     """
@@ -380,7 +358,6 @@ def agenda_to_str(agenda, date_debut, date_fin):
     Bonjour Prudencio, au programme le 2017-10-12:
     https://aliandchrishomes.com/fr/portfolio/15363-rue-de-boischatel/
     ------------------------------------------------------------
-
 
     Args:
         agenda (dict): L'agenda à afficher.
@@ -409,7 +386,6 @@ def agenda_to_str(agenda, date_debut, date_fin):
     return res + '-' * 60
 
 
-# Return str: Chaine de caractères contenant les évènements concernés en ordre de date et heure.
 
 def afficher_menu():
     """ Affiche le menu pour l'interface utilisateur"""
@@ -423,8 +399,7 @@ def afficher_menu():
     print("7- Quitter")
 
 
-# OK
-
+    
 def main():
     print("*" * 50)
     print("{:^50}".format("Bienvenue dans votre gestionnaire d'agenda."))
@@ -502,6 +477,6 @@ def main():
         print()
 
 
-# OK
+# Programme principal
 if __name__ == '__main__':
     main()
