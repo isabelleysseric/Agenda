@@ -2,14 +2,23 @@
 <br>
 <a href=""><img src="http://www.thebluediamondgallery.com/wooden-tile/images/agenda.jpg"alt="Agenda, image de TheBlueDiamondGallery.com"></a><br>
 <br>
+<br>
+
+
 ## AUTEUR:<br>
 ============
 <p> Isabelle EYSSERIC</p>
 <br>
+<br>
+
+
 ## ETAT DU PROJET:<br>
 ==================
 <p>Version initiale</p>
 <br>
+<br>
+
+
 ## DESCRIPTION:<br>
 ================
 <p> L'agenda est représenté dans le programme par un dictionnaire avec trois clés: <code>proprio</code>, <code>evenements</code> et <code>max_id</code>. </p>
@@ -24,6 +33,9 @@
 <li><code>titre</code> (le titre ou le nom de l’événement) et </li>
 <li><code>lieu</code> (le lieu où se déroule l’événement). </li>
 <br>
+<br>
+
+
 ## UTILISATION:<br>
 ===============
 <p>Le  programme contient un seul fichier <code>agenda.py</code> avec les méthodes:</p>
@@ -50,15 +62,4 @@
 <li> <code>6- Afficher l'agenda</code></li>
 <li> <code>7- Quitter</code></li><br>
 <br>
-## MÉTHODE DE RAPPORT DE BUG:<br>
-=============================
-<p>(À déterminer)</p>
-<br>
-## CONTRIBUTION:<br>
-================
-<p>(À déterminer)</p>
-<br>
-## Licence(s), copyright:<br>
-=========================
-<p>(À déterminer)</p>
 <br>
