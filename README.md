@@ -5,6 +5,17 @@
 <br>
 
 
+<p align='center'>
+  <a href="https://github.com/isabelleysseric/Agenda">Agenda</a> (GitHub)
+  &nbsp; • &nbsp;<a href="https://github.com/isabelleysseric/Agenda/wiki">Agenda</a> (Wiki)<br/>
+  <a href="https://github.com/isabelleysseric">isabelleysseric</a> (GitHub)
+  &nbsp; • &nbsp;<a href="https://isabelleysseric.com/">isabelleysseric.com</a> (Portfolio)
+  &nbsp; • &nbsp;<a href="https://www.linkedin.com/in/isabelle-eysseric/">isabelle-eysseric</a> (LinkedIn) <br/>
+</p>
+<br/>
+<br/>
+
+
 ## AUTEUR:<br>
 ============
 <p> Isabelle EYSSERIC</p>
